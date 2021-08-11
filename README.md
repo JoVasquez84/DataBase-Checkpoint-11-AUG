@@ -32,25 +32,16 @@ VALUES
 
 
 
--- 1
-SELECT * FROM destinations;
--- 2
+SELECT destinations.name FROM destinations;
 SELECT * FROM destinations WHERE has_beaches = 'true';
--- 3
 SELECT * FROM destinations WHERE average_temp > 60;
---4
 SELECT * FROM destinations WHERE has_beaches ='true' AND has_mountains='true';
---5
 SELECT * FROM destinations WHERE cost_of_flight < 500;
---6
 INSERT INTO destinations VALUES (6, 'The Bahamas',78,true,false,345);
---7
 UPDATE destinations SET cost_of_flight = 1000 WHERE id = 3;
---8
 DELETE FROM destinations WHERE id = 2 RETURNING *;
---9
 UPDATE destinations SET name = 'Scotland' WHERE name = 'England';
---10
+
 ALTER TABLE airlines ADD PRIMARY KEY (id);
 ALTER TABLE destinations ADD PRIMARY KEY (id);
 
@@ -79,5 +70,10 @@ VALUES
 (4,3),
 (4,5);
 
---11
+SELECT airlines.name FROM airlines WHERE airlines.id IN (SELECT airline_id FROM airlines_destinations WHERE airlines_destinations.destinations_id=3);
+
+SELECT airlines.name FROM airlines WHERE airlines.id NOT IN (SELECT airline_id FROM airlines_destinations WHERE airlines_destinations.destinations_id=4);
+
+
+SELECT * FROM destinations;
 
